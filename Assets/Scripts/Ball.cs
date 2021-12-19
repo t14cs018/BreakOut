@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ball : MonoBehaviour
 {
@@ -14,7 +15,11 @@ public class Ball : MonoBehaviour
     Rigidbody myRigidbody;
     // Transfomrコンポーネント保持用
     Transform myTransform;
-    
+    // スコア計算用
+    private int score;
+    // スコア描画用
+    public Text scoreText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +34,8 @@ public class Ball : MonoBehaviour
         // 決まった方向から初速5でスタート
         myRigidbody.velocity = new Vector3(speedX, speedY, 0f);  // (x, y, z)の速度
         myTransform = transform;
+        score = 0;
+
     }
 
     // Update is called once per frame
@@ -46,10 +53,27 @@ public class Ball : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        
         // プレイヤーオブジェクトを呼び出す（事前にObjectのプロパティからTagをつけておく必要がある）
         if (collision.gameObject.CompareTag("Player"))
         {
-            print("Enter");
+            print("Collision to player");
+            changeBallSpeed(collision);
+        }
+
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            print("Collision to Block");
+            changeBallSpeed(collision);
+            score += 100;
+            scoreText.text = string.Format("Score:{0}", score);
+
+
+        }
+    }
+
+    private void changeBallSpeed(Collision collision)
+    {
             // プレイヤーの位置を取得
             Vector3 playerPos = collision.transform.position;
             // ボールの位置を取得
@@ -60,8 +84,13 @@ public class Ball : MonoBehaviour
             float speed = myRigidbody.velocity.magnitude;
             // 速度を変更
             myRigidbody.velocity = direction * speed;
-            // minSpeedを上げる（プレイヤーに衝突するたびに速度があがる）
-            minSpeed *= 1.01f;
-        }
+
+            // minSpeedを上げる（プレイヤーかブロックに衝突するたびに速度があがる）
+            if (collision.gameObject.CompareTag("Player"))
+                minSpeed *= 1.01f;
+            else if(collision.gameObject.CompareTag("Block"))
+                minSpeed *= 1.07f;
+
+            return;
     }
 }
