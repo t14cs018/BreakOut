@@ -14,8 +14,17 @@ public class GameOver : MonoBehaviour
     {
         if (isGameOver && Input.GetButtonDown("Submit"))
         {
-            // Playシーンをロードし直す
-            SceneManager.LoadScene("Play");
+            // Playシーンをアンロードし、タイトル画面をロードする
+            // SceneManager.UnloadSceneAsync("Play");
+            SceneManager.LoadScene("Title");
+            isGameOver = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // タイトル画面に戻る
+            // SceneManager.UnloadSceneAsync("Play");
+            SceneManager.LoadScene("Title");
         }
     }
 

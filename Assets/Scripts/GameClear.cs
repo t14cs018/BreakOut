@@ -28,13 +28,9 @@ public class GameClear : MonoBehaviour
 
         if (isGameClear && Input.GetButtonDown("Submit"))
         {
-            // Playシーンをロードし直す
-            SceneManager.LoadScene("Play");
-            Time.timeScale = 1f;
+            // タイトル画面に遷移
+            SceneManager.UnloadSceneAsync("Play");
+            SceneManager.LoadScene("Title");
         }
-        // else
-        // {
-        //     print(myTransform.childCount);
-        // }
     }
 }
