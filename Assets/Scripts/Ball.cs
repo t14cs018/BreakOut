@@ -19,6 +19,8 @@ public class Ball : MonoBehaviour
     private int score;
     // スコア描画用
     public Text scoreText;
+    public AudioClip blockImpact;
+    public AudioClip wallImpact;
 
     // Start is called before the first frame update
     void Start()
@@ -54,15 +56,20 @@ public class Ball : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         
+        if (collision.gameObject.CompareTag("Wall"))
+            GetComponent<AudioSource>().PlayOneShot(wallImpact, 0.1f);
+
         // プレイヤーオブジェクトを呼び出す（事前にObjectのプロパティからTagをつけておく必要がある）
         if (collision.gameObject.CompareTag("Player"))
         {
+            GetComponent<AudioSource>().PlayOneShot(wallImpact, 0.1f);
             print("Collision to player");
             changeBallSpeed(collision);
         }
 
         if (collision.gameObject.CompareTag("Block"))
         {
+            GetComponent<AudioSource>().PlayOneShot(blockImpact, 1.0f);
             print("Collision to Block");
             changeBallSpeed(collision);
             score += 100;

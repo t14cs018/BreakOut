@@ -29,7 +29,6 @@ public class GameClear : MonoBehaviour
         if (isGameClear && Input.GetButtonDown("Submit"))
         {
             // タイトル画面に遷移
-            SceneManager.UnloadSceneAsync("Play");
             SceneManager.LoadScene("Title");
         }
     }
