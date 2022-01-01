@@ -32,9 +32,10 @@ public class Ball : MonoBehaviour
         float phase = Random.Range(225f, 325f) * Mathf.PI * 2f / 360f;
 
         float speedX = initSpeed * Mathf.Cos(phase);
-        float speedY = initSpeed * Mathf.Sin(phase);
+        // float speedY = initSpeed * Mathf.Sin(phase);
         // 決まった方向から初速5でスタート
-        myRigidbody.velocity = new Vector3(speedX, speedY, 0f);  // (x, y, z)の速度
+        myRigidbody.velocity = new Vector3(speedX, 0f, 0f);  // (x, y, z)の速度
+        // myRigidbody.velocity = new Vector3(speedX, speedY, 0f);  // (x, y, z)の速度
         myTransform = transform;
         score = 0;
 
@@ -55,31 +56,31 @@ public class Ball : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        
-        if (collision.gameObject.CompareTag("Wall"))
-            GetComponent<AudioSource>().PlayOneShot(wallImpact, 0.1f);
-
         // プレイヤーオブジェクトを呼び出す（事前にObjectのプロパティからTagをつけておく必要がある）
         if (collision.gameObject.CompareTag("Player"))
         {
-            GetComponent<AudioSource>().PlayOneShot(wallImpact, 0.1f);
+            // GetComponent<AudioSource>().PlayOneShot(wallImpact, 0.1f);
             print("Collision to player");
-            changeBallSpeed(collision);
+            changeBallAngle(collision);
         }
 
         if (collision.gameObject.CompareTag("Block"))
         {
-            GetComponent<AudioSource>().PlayOneShot(blockImpact, 1.0f);
+            // GetComponent<AudioSource>().PlayOneShot(blockImpact, 1.0f);
             print("Collision to Block");
-            changeBallSpeed(collision);
+            changeBallAngle(collision);
             score += 100;
             scoreText.text = string.Format("Score:{0}", score);
+        }
 
-
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            // GetComponent<AudioSource>().PlayOneShot(wallImpact, 0.1f);
+            changeBallAngleForWall(collision);
         }
     }
 
-    private void changeBallSpeed(Collision collision)
+    private void changeBallAngle(Collision collision)
     {
             // プレイヤーの位置を取得
             Vector3 playerPos = collision.transform.position;
@@ -100,4 +101,38 @@ public class Ball : MonoBehaviour
 
             return;
     }
+
+    private void changeBallAngleForWall(Collision collision)
+    {
+            Vector3 direction = myRigidbody.velocity.normalized;
+            float rad = Mathf.PI * 2f / 360f;
+
+            // 壁にほぼ垂直にぶつかった場合は角度を少し変更する
+            if ((direction.y < Mathf.Cos(80f * rad) && 0 < direction.y) || (direction.x > Mathf.Cos(100f * rad) && 0 > direction.x))
+            {
+                print("changeBallAngleForWall Enter");
+                direction = Quaternion.Euler(0f, 0f, Random.Range(1f, 15f)) * direction;
+
+                // 現在の速さを取得
+                float speed = myRigidbody.velocity.magnitude;
+                // 速度を変更
+                myRigidbody.velocity = direction * speed;
+            }
+
+            if ((direction.x < Mathf.Cos(80f * rad) && 0 <= direction.x) || (direction.y <= 0 && direction.y > Mathf.Cos(100f * rad)))
+            {
+                print("changeBallAngleForWall Enter");
+                direction = Quaternion.Euler(0f, 0f, Random.Range(-1f, -15f)) * direction;
+                // 現在の速さを取得
+                float speed = myRigidbody.velocity.magnitude;
+                // 速度を変更
+                myRigidbody.velocity = direction * speed;
+            }
+
+            print($"BallVec is {myRigidbody.velocity}");
+
+            return;
+    }
+
+
 }

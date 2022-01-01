@@ -3,7 +3,10 @@ guid: d2baad91ed0287c41b4f9afab9d27c6a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - scoreText: {instanceID: 0}
+  - blockImpact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
+  - wallImpact: {fileID: 8300000, guid: c9c9cf811477fa847a6e7396c85d33d4, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

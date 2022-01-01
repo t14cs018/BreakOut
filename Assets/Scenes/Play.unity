@@ -169,7 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &35494063
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -312,7 +311,7 @@ GameObject:
   - component: {fileID: 241378674}
   m_Layer: 0
   m_Name: Wall_Left
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -500,7 +499,7 @@ GameObject:
   - component: {fileID: 289042842}
   m_Layer: 0
   m_Name: Wall_Bottom
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -640,7 +639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &333632195
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -809,7 +807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &470390158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1001,7 +998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &752322846
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1110,7 +1106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &814983687
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1302,7 +1297,8 @@ MonoBehaviour:
   maxSpeed: 30
   initSpeed: 7
   scoreText: {fileID: 263592645}
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
+  blockImpact: {fileID: 8300000, guid: c9c9cf811477fa847a6e7396c85d33d4, type: 3}
+  wallImpact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!1 &839790769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,7 +1345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &839790772
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1458,7 +1453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &845668452
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1567,7 +1561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &865402724
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1676,7 +1669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &1121468901
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1785,7 +1777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &1131785808
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1963,7 +1954,7 @@ GameObject:
   - component: {fileID: 1235908546}
   m_Layer: 0
   m_Name: Wall_Top
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2090,7 +2081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &1242977567
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2199,7 +2189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &1257747053
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2308,7 +2297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &1569429244
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2385,7 +2373,7 @@ GameObject:
   - component: {fileID: 1653330275}
   m_Layer: 0
   m_Name: Wall_Right
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2512,7 +2500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &1696593792
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2621,7 +2608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &1749925687
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2856,7 +2842,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf696665b68094459418ce8994a67d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 54cb6a955a5c4db469220aad1fbc204b, type: 3}
 --- !u!65 &1962743857
 BoxCollider:
   m_ObjectHideFlags: 0
