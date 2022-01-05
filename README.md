@@ -31,3 +31,5 @@ Unityの勉強とゲーム制作について勉強するのを目的に、ブロ
 ## 参考サイト
 * 広島大学ゲーム制作同好会　Unityプログラミング講座 
   * https://hu-gsd.com/lecture/unity-lectures/
+* ゲームをプレイする場合は以下のURLからDLしてください
+  * https://drive.google.com/drive/folders/1-1A8tHdp8n0K2-16IfzSID4mrWJtQJGg?usp=sharing
