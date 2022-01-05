@@ -18,7 +18,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 左右のキー入力により速度を変更する
-        myRigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * initVelocity, 0f, 0f);
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            // 左右のキー入力により速度を変更する
+            myRigidbody.velocity = new Vector3(initVelocity, 0f, 0f);
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            myRigidbody.velocity = new Vector3(initVelocity * -1, 0f, 0f);
+        }
+        else 
+        {
+            myRigidbody.velocity = new Vector3(0f, 0f, 0f);
+        }
     }
 }

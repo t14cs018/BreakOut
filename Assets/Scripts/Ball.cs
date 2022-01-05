@@ -21,10 +21,14 @@ public class Ball : MonoBehaviour
     public Text scoreText;
     public AudioClip blockImpact;
     public AudioClip wallImpact;
+    // 計算用
+    private float rad = Mathf.PI * 2f / 360f;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        // 初速度
         initSpeed = minSpeed;
         // Rigidbodyにアクセスし変数に保持しておく
         myRigidbody = GetComponent<Rigidbody>();
@@ -49,37 +53,37 @@ public class Ball : MonoBehaviour
         float clampedSpeed = Mathf.Clamp(velocity.magnitude, minSpeed, maxSpeed);
         // 速度を変更
         myRigidbody.velocity = velocity.normalized * clampedSpeed;
-        // print(myRigidbody.velocity);
-        // print(minSpeed);
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        
-        if (collision.gameObject.CompareTag("Wall"))
-            GetComponent<AudioSource>().PlayOneShot(wallImpact, 0.1f);
-
         // プレイヤーオブジェクトを呼び出す（事前にObjectのプロパティからTagをつけておく必要がある）
         if (collision.gameObject.CompareTag("Player"))
         {
             GetComponent<AudioSource>().PlayOneShot(wallImpact, 0.1f);
             print("Collision to player");
-            changeBallSpeed(collision);
+            changeBallAngle(collision);
         }
 
+        // ブロックに当たった時の処理
         if (collision.gameObject.CompareTag("Block"))
         {
             GetComponent<AudioSource>().PlayOneShot(blockImpact, 1.0f);
             print("Collision to Block");
-            changeBallSpeed(collision);
+            changeBallAngle(collision);
             score += 100;
             scoreText.text = string.Format("Score:{0}", score);
+        }
 
-
+        // 壁に当たった時の処理
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            GetComponent<AudioSource>().PlayOneShot(wallImpact, 0.1f);
+            changeBallAngleForWall(collision);
         }
     }
 
-    private void changeBallSpeed(Collision collision)
+    private void changeBallAngle(Collision collision)
     {
             // プレイヤーの位置を取得
             Vector3 playerPos = collision.transform.position;
@@ -87,10 +91,15 @@ public class Ball : MonoBehaviour
             Vector3 ballPos = myTransform.position;
             // プレイヤーから見たボールの方向を計算
             Vector3 direction = (ballPos - playerPos).normalized;
-            // 現在の速さを取得
-            float speed = myRigidbody.velocity.magnitude;
-            // 速度を変更
-            myRigidbody.velocity = direction * speed;
+            print(direction);
+            // 横から当たった場合の挙動は変更しない
+            if (direction.y > Mathf.Cos(80f * rad) || direction.y < Mathf.Cos(100f * rad))
+            {
+                // 現在の速さを取得
+                float speed = myRigidbody.velocity.magnitude;
+                // 反射角度を変更
+                myRigidbody.velocity = direction * speed;
+            }
 
             // minSpeedを上げる（プレイヤーかブロックに衝突するたびに速度があがる）
             if (collision.gameObject.CompareTag("Player"))
@@ -100,4 +109,37 @@ public class Ball : MonoBehaviour
 
             return;
     }
+
+    private void changeBallAngleForWall(Collision collision)
+    {
+            Vector3 direction = myRigidbody.velocity.normalized;
+
+            // 壁にほぼ垂直にぶつかった場合は角度を少し変更する
+            if ((direction.y < Mathf.Cos(80f * rad) && 0 < direction.y) || (direction.x > Mathf.Cos(100f * rad) && 0 > direction.x))
+            {
+                print("changeBallAngleForWall Enter");
+                direction = Quaternion.Euler(0f, 0f, Random.Range(1f, 15f)) * direction;
+
+                // 現在の速さを取得
+                float speed = myRigidbody.velocity.magnitude;
+                // 速度を変更
+                myRigidbody.velocity = direction * speed;
+            }
+
+            if ((direction.x < Mathf.Cos(80f * rad) && 0 <= direction.x) || (direction.y <= 0 && direction.y > Mathf.Cos(100f * rad)))
+            {
+                print("changeBallAngleForWall Enter");
+                direction = Quaternion.Euler(0f, 0f, Random.Range(-1f, -15f)) * direction;
+                // 現在の速さを取得
+                float speed = myRigidbody.velocity.magnitude;
+                // 速度を変更
+                myRigidbody.velocity = direction * speed;
+            }
+
+            print($"BallVec is {myRigidbody.velocity}");
+
+            return;
+    }
+
+
 }
