@@ -19,7 +19,7 @@ Unityの勉強とゲーム制作について勉強するのを目的に、ブロ
 * GameClear.cs, GameOver.cs
   * ゲームクリア時、ゲームオーバー時のテキスト表示やその後の処理を行ってます
 ## 開発環境
-* エンジン: Unity 2020.3.17f1 Personal
+* ゲームエンジン: Unity 2020.3.17f1 Personal
 * エディター: Visual Studio Code
 * バージョン管理ツール: GitHub
 ## 工夫した点
