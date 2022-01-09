@@ -58,10 +58,10 @@ public class Ball : MonoBehaviour
         }
         // 現在の速度を取得
         Vector3 velocity = myRigidbody.velocity;
-        // 速さを計算
-        float clampedSpeed = Mathf.Clamp(velocity.magnitude, minSpeed, maxSpeed);
+        // // 速さを計算
+        // float clampedSpeed = Mathf.Clamp(velocity.magnitude, minSpeed, maxSpeed);
         // 速度を変更
-        myRigidbody.velocity = velocity.normalized * clampedSpeed;
+        myRigidbody.velocity = velocity.normalized * minSpeed;
 
         collisionTime++;
     }
@@ -127,28 +127,26 @@ public class Ball : MonoBehaviour
     private void changeBallAngleForWall(Collision collision)
     {
             Vector3 direction = myRigidbody.velocity.normalized;
+            print("changeBallAngleForWall Enter");
 
             // 壁にほぼ垂直にぶつかった場合は角度を少し変更する
-            if ((direction.y < Mathf.Cos(80f * rad) && 0 < direction.y) || (direction.x > Mathf.Cos(100f * rad) && 0 > direction.x))
+            if ((direction.y < Mathf.Cos(80f * rad) && 0 < direction.y && direction.x > 0) || 
+                ((direction.x > Mathf.Cos(100f * rad) && 0 > direction.x) && direction.y > 0))
             {
-                print("changeBallAngleForWall Enter");
-                direction = Quaternion.Euler(0f, 0f, Random.Range(1f, 15f)) * direction;
+                direction = Quaternion.Euler(0f, 0f, 5f) * direction;
 
-                // 現在の速さを取得
-                float speed = myRigidbody.velocity.magnitude;
-                // 速度を変更
-                myRigidbody.velocity = direction * speed;
             }
 
-            if ((direction.x < Mathf.Cos(80f * rad) && 0 <= direction.x) || (direction.y <= 0 && direction.y > Mathf.Cos(100f * rad)))
+            if (((direction.x < Mathf.Cos(80f * rad) && 0 <= direction.x) && direction.y > 0) || 
+                ((direction.y <= 0 && direction.y > Mathf.Cos(100f * rad)) && direction.x < 0))
             {
-                print("changeBallAngleForWall Enter");
-                direction = Quaternion.Euler(0f, 0f, Random.Range(-1f, -15f)) * direction;
-                // 現在の速さを取得
-                float speed = myRigidbody.velocity.magnitude;
-                // 速度を変更
-                myRigidbody.velocity = direction * speed;
+                direction = Quaternion.Euler(0f, 0f, -5f) * direction;
             }
+
+            // 現在の速さを取得
+            float speed = myRigidbody.velocity.magnitude;
+            // 速度を変更
+            myRigidbody.velocity = direction * speed;
 
             print($"BallVec is {myRigidbody.velocity}");
 
