@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
 
     // 速さの最小値を指定する変数
     public float minSpeed = 10f;
-    // 速さの最小値を指定する変数
+    // 速さの最大値を指定する変数
     public float maxSpeed = 30f;
     // ボールの初速度設定
     public float initSpeed;
@@ -37,7 +37,7 @@ public class Ball : MonoBehaviour
 
         float speedX = initSpeed * Mathf.Cos(phase);
         float speedY = initSpeed * Mathf.Sin(phase);
-        // 決まった方向から初速5でスタート
+        // 決まった方向からスタート
         myRigidbody.velocity = new Vector3(speedX, speedY, 0f);  // (x, y, z)の速度
         myTransform = transform;
         score = 0;
@@ -47,6 +47,11 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if (minSpeed >= maxSpeed)
+        {
+            minSpeed = maxSpeed;
+        }
         // 現在の速度を取得
         Vector3 velocity = myRigidbody.velocity;
         // 速さを計算

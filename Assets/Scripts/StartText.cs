@@ -22,8 +22,7 @@ public class StartText : MonoBehaviour
     {
         if (Input.GetButtonDown("Submit"))
         {
-            // Playシーンをロードし直す
-            // SceneManager.UnloadSceneAsync("Title");
+            // Playシーンをロード
             SceneManager.LoadScene("Play");
             Time.timeScale = 1f;
         }

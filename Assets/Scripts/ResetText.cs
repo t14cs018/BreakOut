@@ -13,10 +13,4 @@ public class ResetText : MonoBehaviour
         // myTextにからの文字列を設定する
         myText.text = "";
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
