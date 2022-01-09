@@ -24,6 +24,9 @@ public class Ball : MonoBehaviour
     // 計算用
     private float rad = Mathf.PI * 2f / 360f;
 
+    // プレイヤーバーに瞬間的に複数衝突した時に速度が急激にあがらないように
+    private int collisionTime = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,13 +45,14 @@ public class Ball : MonoBehaviour
         myTransform = transform;
         score = 0;
 
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (minSpeed >= maxSpeed)
+        // 最小速度が最大速度を超えないようにする
+        if (minSpeed > maxSpeed)
         {
             minSpeed = maxSpeed;
         }
@@ -58,6 +62,8 @@ public class Ball : MonoBehaviour
         float clampedSpeed = Mathf.Clamp(velocity.magnitude, minSpeed, maxSpeed);
         // 速度を変更
         myRigidbody.velocity = velocity.normalized * clampedSpeed;
+
+        collisionTime++;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -97,8 +103,9 @@ public class Ball : MonoBehaviour
             // プレイヤーから見たボールの方向を計算
             Vector3 direction = (ballPos - playerPos).normalized;
             print(direction);
-            // 横から当たった場合の挙動は変更しない
-            if (direction.y > Mathf.Cos(80f * rad) || direction.y < Mathf.Cos(100f * rad))
+
+            // ボールがプレイヤーのバーに横から衝突した場合はボールの挙動を変更しない
+            if (!(collision.gameObject.CompareTag("Player") && direction.y <= 0))
             {
                 // 現在の速さを取得
                 float speed = myRigidbody.velocity.magnitude;
@@ -107,8 +114,10 @@ public class Ball : MonoBehaviour
             }
 
             // minSpeedを上げる（プレイヤーかブロックに衝突するたびに速度があがる）
-            if (collision.gameObject.CompareTag("Player"))
+            if (collision.gameObject.CompareTag("Player") && collisionTime > 1000){
                 minSpeed *= 1.01f;
+                collisionTime = 0;
+            }
             else if(collision.gameObject.CompareTag("Block"))
                 minSpeed *= 1.07f;
 
